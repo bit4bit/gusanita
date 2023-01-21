@@ -1,5 +1,5 @@
 namespace Gusanita.Core;
 
-public class CouldNotEatItSelf : Exception
+public class CouldNotEatMySelf : Exception
 {
 }

@@ -13,7 +13,7 @@ public class AsPlayerTests
     {
         Core.Gusanita g = new Core.Gusanita();
 
-        g.to(direction);
+        g.To(direction);
 
         Assert.That(g.LookingTo, Is.EqualTo(direction));
     }
@@ -23,7 +23,7 @@ public class AsPlayerTests
         Core.Gusanita g = new Core.Gusanita();
         Core.Fruit f = new Core.Fruit();
 
-        g.eat(f);
+        g.Eat(f);
 
         Assert.That(g.AmountFruitsEaten, Is.EqualTo(1));
     }

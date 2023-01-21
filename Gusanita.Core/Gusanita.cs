@@ -3,44 +3,48 @@
 // Larva de mosca
 public class Gusanita
 {
-    public Direction LookingTo {
-        get {
+    public Direction LookingTo
+    {
+        get
+        {
             return _direction;
         }
     }
-    
-    public int AmountFruitsEaten {
-        get {
+
+    public int AmountFruitsEaten
+    {
+        get
+        {
             return _amount_fruits_eaten;
         }
     }
 
     public GusanitaBody Body;
 
-    public void eat(GusanitaBodyPart part)
+    public void Eat(GusanitaBodyPart part)
     {
-        if (part.belongs_to(Body))
-            throw new CouldNotEatItSelf();
-    }
-    
-    public void eat(GusanitaBody body)
-    {
-        if (Body.is_same(body))
-            throw new CouldNotEatItSelf();
-    }
-    
-    public void eat(Gusanita g)
-    {
-        throw new CouldNotEatItSelf();
+        if (part.Belongs_to(Body))
+            throw new CouldNotEatMySelf();
     }
 
-    public void eat(Fruit fruit)
+    public void Eat(GusanitaBody body)
+    {
+        if (Body.Is_same(body))
+            throw new CouldNotEatMySelf();
+    }
+
+    public void Eat(Gusanita g)
+    {
+        throw new CouldNotEatMySelf();
+    }
+
+    public void Eat(Fruit fruit)
     {
         _amount_fruits_eaten += 1;
-        Body.stretch();
+        Body.Stretch();
     }
-    
-    public void to(Direction direction)
+
+    public void To(Direction direction)
     {
         _direction = direction;
     }
@@ -50,7 +54,7 @@ public class Gusanita
     {
         Body = new GusanitaBody(this);
     }
-    
+
     private Direction _direction = Direction.EAST;
     private int _amount_fruits_eaten = 0;
 }

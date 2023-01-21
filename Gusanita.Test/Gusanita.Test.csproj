@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gusanita.Core\Gusanita.Core.csproj" />
+    <ProjectReference Include="..\Gusanita.ClassicGame\Gusanita.ClassicGame.csproj" />
   </ItemGroup>
 
 </Project>

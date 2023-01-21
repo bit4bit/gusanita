@@ -9,8 +9,8 @@ public class GusanitaBodyPart
         _body = body;
     }
 
-    public bool belongs_to(GusanitaBody body)
+    public bool Belongs_to(GusanitaBody body)
     {
-        return _body.is_same(body);
+        return _body.Is_same(body);
     }
 }

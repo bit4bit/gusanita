@@ -2,18 +2,22 @@ namespace Gusanita.Core;
 
 public class GusanitaBody
 {
-    public List<GusanitaBodyPart> Parts {
-        get {
+    public List<GusanitaBodyPart> Parts
+    {
+        get
+        {
             return _parts;
         }
     }
 
-    public int Length {
-        get {
+    public int Length
+    {
+        get
+        {
             return _length;
         }
     }
-    
+
     private List<GusanitaBodyPart> _parts;
     private int _length;
     private Gusanita _gusanita;
@@ -25,13 +29,13 @@ public class GusanitaBody
         _length = 0;
     }
 
-    public void stretch()
+    public void Stretch()
     {
         _length += 1;
         _parts.Add(new GusanitaBodyPart(this));
     }
-    
-    public bool is_same(GusanitaBody other)
+
+    public bool Is_same(GusanitaBody other)
     {
         return _gusanita.Equals(other._gusanita);
     }

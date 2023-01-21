@@ -10,8 +10,9 @@ public class AsGusanitaTests
     {
         var g = new Core.Gusanita();
 
-        Assert.Throws<Core.CouldNotEatItSelf>(() => {
-            g.eat(g);
+        Assert.Throws<Core.CouldNotEatMySelf>(() =>
+        {
+            g.Eat(g);
         });
     }
 
@@ -20,8 +21,8 @@ public class AsGusanitaTests
     {
         var g = new Core.Gusanita();
 
-        g.eat(aBanana());
-        
+        g.Eat(aBanana());
+
         Assert.That(g.Body.Length, Is.EqualTo(1));
     }
 
@@ -29,9 +30,10 @@ public class AsGusanitaTests
     public void i_can_not_eat_my_body()
     {
         var g = new Core.Gusanita();
-        
-        Assert.Throws<Core.CouldNotEatItSelf>(() => {
-            g.eat(g.Body);
+
+        Assert.Throws<Core.CouldNotEatMySelf>(() =>
+        {
+            g.Eat(g.Body);
         });
     }
 
@@ -39,12 +41,13 @@ public class AsGusanitaTests
     public void i_can_not_eat_a_part_of_my_body()
     {
         var g = new Core.Gusanita();
-        
-        g.eat(aBanana());
-        
-        Assert.Throws<Core.CouldNotEatItSelf>(() => {
+
+        g.Eat(aBanana());
+
+        Assert.Throws<Core.CouldNotEatMySelf>(() =>
+        {
             var part = g.Body.Parts.Last();
-            g.eat(part);
+            g.Eat(part);
         });
     }
 
