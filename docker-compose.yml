@@ -1,0 +1,18 @@
+# Copyright 2021 Picallex Holding Group. All rights reserved.
+#
+# @author (2021) Jovany Leandro G.C <jovany@picallex.com>
+version: '3.7'
+services:
+  main.dev:
+    user: "${UID}:${GID}"
+    build:
+      context: .
+    command: sleep 10h
+    working_dir: /usr/src
+    environment:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
+      - DOTNET_NOLOGO=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src
