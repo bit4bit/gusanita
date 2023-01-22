@@ -5,9 +5,8 @@ public interface Pointable
     public int Earn();
 }
 
-public interface Fruitable : Pointable, Core.Collidable
+public interface Fruitable : Pointable, Core.Collidable, Core.Eatable
 {
-    public Core.Fruit Fruit();
 }
 
 public class BananaFruit : Fruitable
@@ -29,9 +28,9 @@ public class BananaFruit : Fruitable
         return 1;
     }
 
-    public Core.Fruit Fruit()
+    public bool IsEatable()
     {
-        return new Core.Fruit();
+        return true;
     }
 }
 
@@ -54,8 +53,8 @@ public class PapayaFruit : Fruitable
         return 3;
     }
 
-    public Core.Fruit Fruit()
+    public bool IsEatable()
     {
-        return new Core.Fruit();
+        return true;
     }
 }

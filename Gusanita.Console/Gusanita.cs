@@ -2,20 +2,17 @@ namespace Gusanita.Console;
 
 class Gusanita : Renderable
 {
-    public int X { get { return _x; }}
-    public int Y { get { return _y; }}
-
-    private int _x;
-    private int _y;
+    private ClassicGame.Player _player;
     
-    public Gusanita(int x, int y)
+    public Gusanita(ClassicGame.Player player)
     {
-        _x = x;
-        _y = y;
+        _player = player;
     }
 
     public void Render(Screener screen)
     {
-        screen.RenderCharacter(_x, _y, "o");
+        foreach(var s in _player.Segments()) {
+            screen.RenderCharacter(s.X, s.Y, "o");
+        }
     }
 }

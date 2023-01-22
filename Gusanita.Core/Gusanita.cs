@@ -11,37 +11,11 @@ public class Gusanita
         }
     }
 
-    public int AmountFruitsEaten
+    public void Eat(Eatable it)
     {
-        get
-        {
-            return _amount_fruits_eaten;
-        }
-    }
-
-    public GusanitaBody Body;
-
-    public void Eat(GusanitaBodyPart part)
-    {
-        if (part.Belongs_to(Body))
-            throw new CouldNotEatMySelf();
-    }
-
-    public void Eat(GusanitaBody body)
-    {
-        if (Body.Is_same(body))
-            throw new CouldNotEatMySelf();
-    }
-
-    public void Eat(Gusanita g)
-    {
-        throw new CouldNotEatMySelf();
-    }
-
-    public void Eat(Fruit fruit)
-    {
-        _amount_fruits_eaten += 1;
-        Body.Stretch();
+        if (!it.IsEatable())
+            throw new CouldNotEatThatThing();
+        _behavior.GusanitaAte();
     }
 
     public void To(Direction direction)
@@ -56,7 +30,6 @@ public class Gusanita
     
     public Gusanita(GusanitaBehavior? behavior = null)
     {
-        Body = new GusanitaBody(this);
         if (behavior == null)
             _behavior = new GusanitaDumb();
         else
@@ -65,13 +38,12 @@ public class Gusanita
 
     private GusanitaBehavior _behavior;
     private Direction _direction = Direction.EAST;
-    private int _amount_fruits_eaten = 0;
 }
 
 public interface GusanitaBehavior
 {
     public void GusanitaMovedInDirectionOf(Direction direction);
-    public void GusanitaAte(Fruit fruit);
+    public void GusanitaAte();
 }
 
 public class GusanitaDumb : GusanitaBehavior
@@ -79,7 +51,7 @@ public class GusanitaDumb : GusanitaBehavior
     public void GusanitaMovedInDirectionOf(Direction direction)
     {
     }
-    public void GusanitaAte(Fruit fruit)
+    public void GusanitaAte()
     {
     }
 }

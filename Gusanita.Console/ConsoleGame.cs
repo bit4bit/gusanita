@@ -1,31 +1,43 @@
 namespace Gusanita.Console;
 
-public class ConsoleGame
+public class ConsoleGame : ClassicGame.GusanitaBehavior
 {
     private Screener _screen;
     private int _width;
     private int _height;
-
-    private List<Gusanita> _gusanitas;
-    private List<BananaFruit> _fruits;
+    private List<Fruit> _fruits;
+    private ClassicGame.Player _player;
+    private Gusanita _gusanita;
+    private ClassicGame.Game _game;
     
     public ConsoleGame(Screener screen, int width = 0, int height = 0)
     {
         _screen = screen;
         _width = width;
         _height = height;
-        _gusanitas = new List<Gusanita>();
-        _fruits = new List<BananaFruit>();
+        _player = new ClassicGame.Player(x: 0, y: 0);
+        _gusanita = new Gusanita(_player);
+        _game = new ClassicGame.Game(_player, width: width, height: height, behavior: this);
+        _fruits = new List<Fruit>();
+        
+        _player.ToEast();
     }
 
-    public void AddGusanita(int x, int y)
+    public void Iterate()
     {
-        _gusanitas.Add(new Gusanita(x: x, y: y));
+        _game.Process();
     }
-
+    
     public void AddBanana(int x, int y)
     {
-        _fruits.Add(new BananaFruit(x: x, y: y));
+        var fruit = new Fruit(x: x, y: y);
+        _game.Plant(fruit);
+        _fruits.Add(fruit);
+    }
+
+    public void GusanitaHasAte(ClassicGame.Player player, ClassicGame.Fruitable fruit)
+    {
+        _fruits.Remove((Fruit)fruit);
     }
     
     public void Render()
@@ -35,7 +47,6 @@ public class ConsoleGame
         foreach(var fruit in _fruits)
             fruit.Render(_screen);
         
-        foreach(var gusanita in _gusanitas)
-            gusanita.Render(_screen);
+        _gusanita.Render(_screen);
     }
 }

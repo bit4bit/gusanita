@@ -1,22 +1,33 @@
 namespace Gusanita.Console;
 
-class Fruit
+class Fruit : ClassicGame.Fruitable, Renderable
 {
-}
-
-class BananaFruit : Fruit, Renderable
-{
-    private int _x;
-    private int _y;
+    private Core.Position _position;
+    private ClassicGame.Fruitable _fruit;
     
-    public BananaFruit(int x, int y)
+    public Fruit(int x, int y)
     {
-        _x = x;
-        _y = y;
+        _position = new Core.Position(x: x, y: y);
+        _fruit = new ClassicGame.BananaFruit(x: x, y: y);
     }
     
     public void Render(Screener screen)
     {
-        screen.RenderCharacter(_x, _y, "/");
+        screen.RenderCharacter(_position.X, _position.Y, "/");
+    }
+
+    public bool HasCollided(Core.Position obj)
+    {
+        return _fruit.HasCollided(obj);
+    }
+
+    public int Earn()
+    {
+        return _fruit.Earn();
+    }
+
+    public bool IsEatable()
+    {
+        return _fruit.IsEatable();
     }
 }

@@ -1,5 +1,6 @@
 namespace Gusanita.Core;
 
-public class Fruit
+public interface Eatable
 {
+    public bool IsEatable();
 }

@@ -12,25 +12,6 @@ public class ConsoleTest
         Assert.That(r.Text, Is.EqualTo(""));
     }
 
-    [Test]
-    public void render_an_fixed_game()
-    {
-        // TODO: width, height codigo duplicado
-        var r = new TextScreen(width: 5, height: 5);
-        var c = new ConsoleGame(screen: r,
-                                width: 5,
-                                height: 5);
-
-        c.Render();
-        
-        Assert.That(r.Text, Is.EqualTo(
-                        "....."+
-                        "....."+
-                        "....."+
-                        "....."+
-                        "....."
-                    ));
-    }
 
     [Test]
     public void render_a_game_with_gusanita()
@@ -39,12 +20,32 @@ public class ConsoleTest
         var c = new ConsoleGame(screen: r,
                                 width: 5,
                                 height: 5);
-        c.AddGusanita(x: 0, y: 0);
         
         c.Render();
 
         Assert.That(r.Text, Is.EqualTo(
                         "o...."+
+                        "....."+
+                        "....."+
+                        "....."+
+                        "....."
+                    ));
+    }
+
+    [Test]
+    public void render_a_game_with_gusanita_move_to_steps()
+    {
+        var r = new TextScreen(width: 5, height: 5);
+        var c = new ConsoleGame(screen: r,
+                                width: 5,
+                                height: 5);
+
+        c.Iterate();
+        c.Iterate();
+        c.Render();
+
+        Assert.That(r.Text, Is.EqualTo(
+                        "..o.."+
                         "....."+
                         "....."+
                         "....."+
@@ -64,11 +65,37 @@ public class ConsoleTest
         c.Render();
 
         Assert.That(r.Text, Is.EqualTo(
-                        "....."+
+                        "o...."+
                         "../.."+
                         "....."+
                         "....."+
                         "....."
                     ));
     }
+
+    [Test]
+    public void gusanita_grows_when_eat_fruit()
+    {
+        var r = new TextScreen(width: 5, height: 5);
+        var c = new ConsoleGame(screen: r,
+                                width: 5,
+                                height: 5);
+        c.AddBanana(y: 0, x: 1);
+        c.AddBanana(y: 0, x: 2);
+        
+        c.Iterate();
+        c.Iterate();
+        c.Iterate();
+        c.Iterate();
+        c.Render();
+
+        Assert.That(r.Text, Is.EqualTo(
+                        "..ooo"+
+                        "....."+
+                        "....."+
+                        "....."+
+                        "....."
+                    ));
+    }
+
 }
