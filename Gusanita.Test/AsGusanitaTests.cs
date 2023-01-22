@@ -53,6 +53,6 @@ public class AsGusanitaTests
 
     private Core.Fruit aBanana()
     {
-        return new Core.Banana();
+        return new Core.Fruit();
     }
 }
