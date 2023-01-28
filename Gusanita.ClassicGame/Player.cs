@@ -131,9 +131,9 @@ public class Player : Core.GusanitaBehavior, Core.Collidable
 
         public void Move()
         {
-            Core.Position previous = _head;
+            Core.Position previous = new Core.Position(_head);
             List<Core.Position> segments = cloneSegments();
-            segments.Add(_head);
+            segments.Add(previous);
             
             using(var it = segments.GetEnumerator())
             {
@@ -142,6 +142,7 @@ public class Player : Core.GusanitaBehavior, Core.Collidable
                 
                 while(it.MoveNext()) {
                     previous.UpdateFrom(it.Current);
+                    previous = it.Current;
                 }
             }
         }

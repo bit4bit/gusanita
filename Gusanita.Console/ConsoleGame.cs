@@ -13,18 +13,22 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior
     private ClassicGame.Game _game;
     private Controller _controller;
     
-    public ConsoleGame(Screener screen, Controller controller, int width = 0, int height = 0)
+    public ConsoleGame(Screener screen, Controller? controller = null, int width = 0, int height = 0)
     {
         _screen = screen;
         _width = width;
         _height = height;
-        _controller = controller;
         _player = new ClassicGame.Player(x: 0, y: 0);
         _gusanita = new Gusanita(_player);
         _game = new ClassicGame.Game(_player, width: width, height: height, behavior: this);
         _fruits = new List<Fruit>();
         
         _player.ToEast();
+
+        if (controller == null)
+            _controller = new DummyController();
+        else
+            _controller = controller;
     }
 
     public void Iterate()

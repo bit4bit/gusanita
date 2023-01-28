@@ -98,4 +98,33 @@ public class ConsoleTest
                     ));
     }
 
+    [Test]
+    public void bug_gusanita_must_move_complete_when_change_direction()
+    {
+        var r = new TextScreen(width: 5, height: 5);
+        var m = new RobotController();
+        var c = new ConsoleGame(screen: r,
+                                controller: m,
+                                width: 5,
+                                height: 5);
+        c.AddBanana(y: 0, x: 1);
+        c.AddBanana(y: 0, x: 2);
+        
+        c.Iterate();
+        c.Iterate();
+        c.Iterate();
+        c.Iterate();
+        m.NextToSouth();
+        c.Iterate();
+        c.Iterate();
+        c.Render();
+
+        Assert.That(r.Text, Is.EqualTo(
+                        "....o"+
+                        "....o"+
+                        "....o"+
+                        "....."+
+                        "....."
+                    ));
+    }
 }
