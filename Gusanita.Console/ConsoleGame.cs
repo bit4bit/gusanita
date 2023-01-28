@@ -11,12 +11,14 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior
     private ClassicGame.Player _player;
     private Gusanita _gusanita;
     private ClassicGame.Game _game;
+    private Controller _controller;
     
-    public ConsoleGame(Screener screen, int width = 0, int height = 0)
+    public ConsoleGame(Screener screen, Controller controller, int width = 0, int height = 0)
     {
         _screen = screen;
         _width = width;
         _height = height;
+        _controller = controller;
         _player = new ClassicGame.Player(x: 0, y: 0);
         _gusanita = new Gusanita(_player);
         _game = new ClassicGame.Game(_player, width: width, height: height, behavior: this);
@@ -27,7 +29,7 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior
 
     public void Iterate()
     {
-        HandleKeyboard();
+        _controller.Handle(_player);
         _game.Process();
     }
     
@@ -53,31 +55,5 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior
         _gusanita.Render(_screen);
 
         _screen.Refresh();
-    }
-
-    private void HandleKeyboard()
-    {
-        // https://stackoverflow.com/questions/5620603/non-blocking-read-from-standard-i-o-in-c-sharp
-        if (Console.KeyAvailable)  
-        {  
-            ConsoleKeyInfo key = Console.ReadKey(true);  
-            switch (key.Key)  
-            {  
-                case ConsoleKey.UpArrow:  
-                    _player.ToNorth();
-                    break;
-                case ConsoleKey.LeftArrow:
-                    _player.ToWest();
-                    break;
-                case ConsoleKey.RightArrow:
-                    _player.ToEast();
-                    break;
-                case ConsoleKey.DownArrow:
-                    _player.ToSouth();
-                    break;
-                default:  
-                break;  
-            }  
-        }
     }
 }

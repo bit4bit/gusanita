@@ -1,7 +1,9 @@
 ﻿using Gusanita.Console;
 
+var k = new KeyboardController();
 var c = new ConsoleScreen(5, 5);
-var g = new ConsoleGame(c, 5, 5);
+var g = new ConsoleGame(screen: c, controller: k,
+                        width: 5, height: 5);
 
 Console.WriteLine("Gusanita !!");
 
