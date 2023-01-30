@@ -15,10 +15,10 @@ public class Game
     private Wall _wall;
     private GusanitaBehavior _behavior;
     
-    public Game(Player player, int width = 0, int height = 0, GusanitaBehavior? behavior = null)
+    public Game(Player player, Wall wall, GusanitaBehavior? behavior = null)
     {
         _fruits = new List<Fruitable>();
-        _wall = new Wall(width: width, height: height);
+        _wall = wall;
         _player = player;
         _isFinished = false;
         Points = 0;
