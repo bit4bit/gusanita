@@ -20,7 +20,7 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior
         _height = height;
         _player = new ClassicGame.Player(x: 0, y: 0);
         _gusanita = new Gusanita(_player);
-        _game = new ClassicGame.Game(_player, width: width, height: height, behavior: this);
+        _game = new ClassicGame.Game(_player, ClassicGame.Wall.of(width, height), behavior: this);
         _fruits = new List<Fruit>();
         
         _player.ToEast();

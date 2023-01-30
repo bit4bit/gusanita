@@ -70,6 +70,21 @@ public class ClassicGameTest
         Assert.That(game.IsFinished, Is.EqualTo(true));
     }
 
+    [Test]
+    public void build_a_random_game()
+    {
+        var player = aPlayer();
+        var game = GameRandomBuilder.initialize()
+            .width(10)
+            .height(5)
+            .fruits(5)
+            .game(player);
+
+        Assert.That(game.Width, Is.EqualTo(10));
+        Assert.That(game.Height, Is.EqualTo(5));
+        Assert.That(game.CountFruits, Is.EqualTo(5));
+    }
+    
     private Game aGameOf5x5(Player player)
     {
         return new Game(player, Wall.of5x5());

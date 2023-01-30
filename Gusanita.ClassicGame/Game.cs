@@ -3,13 +3,21 @@ namespace Gusanita.ClassicGame;
 
 public class Game
 {
+    public int CountFruits {
+        get { return _fruits.Count; }
+    }
     public bool IsFinished {
         get { return _isFinished; }
     }
-    private bool _isFinished;
-    
+    public int Width {
+        get { return _wall.Width; }
+    }
+    public int Height {
+        get { return _wall.Height; }
+    }
     public int Points = 0;
-    
+
+    private bool _isFinished;    
     private Player _player;
     private List<Fruitable> _fruits;
     private Wall _wall;

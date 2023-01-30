@@ -2,13 +2,12 @@ namespace Gusanita.ClassicGame;
 
 public class Wall : Core.Collidable
 {
-    private int _width;
-    private int _height;
-    
+    public readonly int Width;
+    public readonly int Height;
     public Wall(int width, int height)
     {
-        _width = width;
-        _height = height;
+        Width = width;
+        Height = height;
     }
 
     public static Wall of5x5()
@@ -25,11 +24,11 @@ public class Wall : Core.Collidable
     {
         if (e.X < 0)
             return true;
-        if (e.X > _width)
+        if (e.X > Width)
             return true;
         if (e.Y < 0)
             return true;
-        if (e.Y > _height)
+        if (e.Y > Height)
             return true;
 
         return false;
