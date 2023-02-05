@@ -9,48 +9,25 @@ public interface Fruitable : Pointable, Core.Collidable, Core.Eatable
 {
 }
 
-public class BananaFruit : Fruitable
+public class Fruit : Fruitable
 {
     private Core.Position _position;
+    private int _earn;
     
-    public BananaFruit(int x, int y)
+    public Fruit(int x, int y, int earn)
     {
         _position = new Core.Position(x: x, y: y);
+        _earn = earn;
     }
 
     public bool HasCollided(Core.Position obj)
     {
         return _position.Intersect(obj);
     }
-    
+
     public int Earn()
     {
-        return 1;
-    }
-
-    public bool IsEatable()
-    {
-        return true;
-    }
-}
-
-public class PapayaFruit : Fruitable
-{
-    private Core.Position _position;
-    
-    public PapayaFruit(int x, int y)
-    {
-        _position = new Core.Position(x: x, y: y);
-    }
-
-    public bool HasCollided(Core.Position obj)
-    {
-        return _position.Intersect(obj);
-    }
-    
-    public int Earn()
-    {
-        return 3;
+        return _earn;
     }
 
     public bool IsEatable()

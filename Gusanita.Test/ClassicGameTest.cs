@@ -6,11 +6,11 @@ public class ClassicGameTest
 {
 
     [Test]
-    public void player_earn_1_point_when_eat_a_banana()
+    public void player_earn_points_when_eat_a_fruit()
     {
         var player = aPlayer();
         var game = aGameOf5x5(player);
-        game.Plant(new BananaFruit(x: 1, y: 0));
+        game.Plant(aFruit(x: 1, y: 0, earn: 1));
 
         player.ToEast();
         game.Process();
@@ -19,28 +19,15 @@ public class ClassicGameTest
     }
 
     [Test]
-    public void player_earn_3_point_when_eat_a_banana()
-    {
-        var player = aPlayer();
-        var game = aGameOf5x5(player);
-        game.Plant(new PapayaFruit(x: 1, y: 0));
-
-        player.ToEast();
-        game.Process();
-        
-        Assert.That(game.Points, Is.EqualTo(3));
-    }
-
-    [Test]
     public void player_dead_if_eat_it_self()
     {
         var player = aPlayer();
         var game = new Game(player, Wall.of(10, 10));
-        game.Plant(aPapaya(x: 1, y: 0));
-        game.Plant(aPapaya(x: 2, y: 0));
-        game.Plant(aPapaya(x: 3, y: 0));
-        game.Plant(aPapaya(x: 4, y: 0));
-        game.Plant(aPapaya(x: 5, y: 0));
+        game.Plant(aFruit(x: 1, y: 0));
+        game.Plant(aFruit(x: 2, y: 0));
+        game.Plant(aFruit(x: 3, y: 0));
+        game.Plant(aFruit(x: 4, y: 0));
+        game.Plant(aFruit(x: 5, y: 0));
 
         player.ToEast();
         game.Process();
@@ -95,8 +82,8 @@ public class ClassicGameTest
         return new Player(x: x, y: y);
     }
     
-    private Fruitable aPapaya(int x, int y)
+    private Fruitable aFruit(int x, int y, int earn = 3)
     {
-        return new PapayaFruit(x: x, y: y);
+        return new Fruit(x: x, y: y, earn: earn);
     }
 }

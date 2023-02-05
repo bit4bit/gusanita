@@ -42,8 +42,8 @@ public class GameRandomBuilder
 
             // frutas
             var fruits = new List<Fruitable>{
-                new PapayaFruit(x: x, y: y),
-                new BananaFruit(x: x, y: y)
+                new Fruit(x: x, y: y, earn: 1),
+                new Fruit(x: x, y: y, earn: 3)
             };
             
             game.Plant(fruits[_rnd.Next(fruits.Count)]);

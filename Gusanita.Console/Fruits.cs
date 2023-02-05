@@ -8,7 +8,7 @@ class Fruit : ClassicGame.Fruitable, Renderable
     public Fruit(int x, int y)
     {
         _position = new Core.Position(x: x, y: y);
-        _fruit = new ClassicGame.BananaFruit(x: x, y: y);
+        _fruit = new ClassicGame.Fruit(x: x, y: y, earn: 1);
     }
     
     public void Render(Screener screen)
