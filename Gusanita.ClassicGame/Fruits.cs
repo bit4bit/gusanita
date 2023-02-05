@@ -11,7 +11,7 @@ public interface Fruitable : Pointable, Core.Collidable, Core.Eatable
 
 public class Fruit : Fruitable
 {
-    private Core.Position _position;
+    protected Core.Position _position;
     private int _earn;
     
     public Fruit(int x, int y, int earn)

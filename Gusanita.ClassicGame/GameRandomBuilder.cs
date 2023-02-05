@@ -1,5 +1,10 @@
 namespace Gusanita.ClassicGame;
 
+public interface FruitFactorier
+{
+    public Fruitable Seed(Game game, int x, int y);
+}
+
 public class GameRandomBuilder
 {
     int _width = 0;
@@ -30,7 +35,7 @@ public class GameRandomBuilder
         return this;
     }
 
-    public Game game(Player player, GusanitaBehavior? behavior = null)
+    public Game game(Player player, FruitFactorier fruitFactory, GusanitaBehavior? behavior = null)
     {
         var game = new Game(player, Wall.of(width: _width,
                                             height: _height),
@@ -40,13 +45,8 @@ public class GameRandomBuilder
             int x = _rnd.Next(1, _width);
             int y = _rnd.Next(1, _height);
 
-            // frutas
-            var fruits = new List<Fruitable>{
-                new Fruit(x: x, y: y, earn: 1),
-                new Fruit(x: x, y: y, earn: 3)
-            };
-            
-            game.Plant(fruits[_rnd.Next(fruits.Count)]);
+            if (fruitFactory != null)
+                game.Plant(fruitFactory.Seed(game, x, y));
         }
 
         return game;

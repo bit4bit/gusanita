@@ -56,16 +56,25 @@ public class ClassicGameTest
         
         Assert.That(game.IsFinished, Is.EqualTo(true));
     }
-
+    
+    class RandomFruitFactory : FruitFactorier
+    {
+        public Fruitable Seed(Game game, int x, int y)
+        {
+            return new Fruit(x: x, y: y, earn: 1);
+        }
+    }
+    
     [Test]
     public void build_a_random_game()
     {
         var player = aPlayer();
+        var fruitFactory = new RandomFruitFactory();
         var game = GameRandomBuilder.initialize()
             .width(10)
             .height(5)
             .fruits(5)
-            .game(player);
+            .game(player, fruitFactory);
 
         Assert.That(game.Width, Is.EqualTo(10));
         Assert.That(game.Height, Is.EqualTo(5));

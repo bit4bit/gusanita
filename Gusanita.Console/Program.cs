@@ -1,20 +1,20 @@
 ﻿using Gusanita.Console;
 
+int WIDTH = 10;
+int HEIGHT = 10;
+int FRUITS = 5;
+
 var k = new KeyboardController();
-var c = new ConsoleScreen(5, 5);
+var c = new ConsoleScreen(width: WIDTH, height: HEIGHT);
 var g = new ConsoleGame(screen: c, controller: k,
-                        width: 5, height: 5);
+                        width: WIDTH, height: HEIGHT, fruits: FRUITS);
 
 Console.WriteLine("Gusanita !!");
 
-g.AddBanana(y: 3, x: 2);
-g.AddBanana(y: 2, x: 2);
-
-// un panorama del juego
+// un panorama inicial del juego
 g.Render();
 
-while(true) {
-    g.Iterate();
+while(g.Iterate()) {
     g.Render();
     Console.WriteLine("---");
     Thread.Sleep(500);

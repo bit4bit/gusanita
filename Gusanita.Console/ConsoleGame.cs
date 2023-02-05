@@ -2,7 +2,7 @@ namespace Gusanita.Console;
 
 using System;
 
-public class ConsoleGame : ClassicGame.GusanitaBehavior
+public class ConsoleGame : ClassicGame.GusanitaBehavior, ClassicGame.FruitFactorier
 {
     private Screener _screen;
     private int _width;
@@ -13,14 +13,13 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior
     private ClassicGame.Game _game;
     private Controller _controller;
     
-    public ConsoleGame(Screener screen, Controller? controller = null, int width = 0, int height = 0)
+    public ConsoleGame(Screener screen, Controller? controller = null, int width = 0, int height = 0, int fruits = 0)
     {
         _screen = screen;
         _width = width;
         _height = height;
         _player = new ClassicGame.Player(x: 0, y: 0);
         _gusanita = new Gusanita(_player);
-        _game = new ClassicGame.Game(_player, ClassicGame.Wall.of(width, height), behavior: this);
         _fruits = new List<Fruit>();
         
         _player.ToEast();
@@ -29,21 +28,39 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior
             _controller = new DummyController();
         else
             _controller = controller;
+
+        _game = ClassicGame.GameRandomBuilder.initialize()
+            .width(width)
+            .height(height)
+            .fruits(fruits)
+            .game(_player, fruitFactory: this, behavior: this);
     }
 
-    public void Iterate()
+    public ClassicGame.Fruitable Seed(ClassicGame.Game game, int x, int y)
+    {
+        var fruit = new Fruit(x: x, y: y);
+        
+        game.Plant(fruit);
+        _fruits.Add(fruit);
+
+        return fruit;
+    }
+
+    public void AddBanana(int x, int y)
+    {
+        Seed(_game, x, y);
+    }
+
+
+    public bool Iterate()
     {
         _controller.Handle(_player);
         _game.Process();
+        if (_game.IsFinished)
+            return false;
+        return true;
     }
     
-    public void AddBanana(int x, int y)
-    {
-        var fruit = new Fruit(x: x, y: y);
-        _game.Plant(fruit);
-        _fruits.Add(fruit);
-    }
-
     public void GusanitaHasAte(ClassicGame.Player player, ClassicGame.Fruitable fruit)
     {
         _fruits.Remove((Fruit)fruit);
