@@ -38,12 +38,23 @@ public class ConsoleGame : ClassicGame.GusanitaBehavior, ClassicGame.FruitFactor
 
     public ClassicGame.Fruitable Seed(ClassicGame.Game game, int x, int y)
     {
-        var fruit = new Fruit(x: x, y: y);
+        var fruit = aRandomFruit();
         
         game.Plant(fruit);
         _fruits.Add(fruit);
 
         return fruit;
+        
+        Fruit aRandomFruit() {
+            Random _rnd = new Random();
+            var fruits = new List<Fruit>{
+                new Fruit(x: x, y: y, repr: "/", earn: 1),
+                new Fruit(x: x, y: y, repr: "*", earn: 2),
+                new Fruit(x: x, y: y, repr:" @", earn: 3)
+            };
+            
+            return fruits[_rnd.Next(fruits.Count)];
+        };
     }
 
     public void AddBanana(int x, int y)
