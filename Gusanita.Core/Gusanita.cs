@@ -3,14 +3,6 @@
 // Larva de mosca
 public class Gusanita
 {
-    public Direction LookingTo
-    {
-        get
-        {
-            return _direction;
-        }
-    }
-
     public void Eat(Eatable it)
     {
         if (!it.IsEatable())
@@ -18,7 +10,7 @@ public class Gusanita
         _behavior.GusanitaAte();
     }
 
-    public void To(Direction direction)
+    public void To(DirectionTo direction)
     {
         _direction = direction;
     }
@@ -37,18 +29,18 @@ public class Gusanita
     }
 
     private GusanitaBehavior _behavior;
-    private Direction _direction = Direction.EAST;
+    private DirectionTo _direction = Direction.EAST;
 }
 
 public interface GusanitaBehavior
 {
-    public void GusanitaMovedInDirectionOf(Direction direction);
+    public void GusanitaMovedInDirectionOf(DirectionTo direction);
     public void GusanitaAte();
 }
 
 public class GusanitaDumb : GusanitaBehavior
 {
-    public void GusanitaMovedInDirectionOf(Direction direction)
+    public void GusanitaMovedInDirectionOf(DirectionTo direction)
     {
     }
     public void GusanitaAte()

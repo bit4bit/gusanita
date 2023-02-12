@@ -87,25 +87,10 @@ public class Player : Core.GusanitaBehavior, Core.Collidable
         _body.GrowUp();
     }
     
-    public void GusanitaMovedInDirectionOf(Core.Direction direction)
+    public void GusanitaMovedInDirectionOf(Core.DirectionTo direction)
     {
         _body.Move();
-        
-        switch(direction)
-        {
-            case Core.Direction.EAST:
-                _head.X += 1;
-                break;
-            case Core.Direction.WEST:
-                _head.X -= 1;
-                break;
-            case Core.Direction.NORTH:
-                _head.Y -= 1;
-                break;
-            case Core.Direction.SOUTH:
-                _head.Y += 1;
-                break;
-        }
+        direction.Apply(_head);
     }
 
 
